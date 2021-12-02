@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practica_fe/widgets/course_details/home_page_info.dart';
+import 'package:practica_fe/widgets/home_page//home_page_info.dart';
 
 class HomeContentMobile extends StatelessWidget {
   const HomeContentMobile({Key? key}) : super(key: key);

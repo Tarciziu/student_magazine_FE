@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:practica_fe/widgets/centered_view/centered_view.dart';
-import 'package:practica_fe/widgets/course_details/home_page_info.dart';
-import 'package:practica_fe/widgets/navigation_bar/navigation_bar.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import 'home_content_desktop.dart';
