@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practica_fe/views/about/about_view.dart';
 import 'package:practica_fe/views/home/home_view.dart';
+import 'package:practica_fe/views/subject/subject_view.dart';
 
 import 'route_names.dart';
 
@@ -11,7 +12,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AboutRoute:
       return _getPageRoute(const AboutView(), settings);
     case MathRoute:
-      return _getPageRoute(AboutView(), settings);
+      return _getPageRoute(const SubjectView(subject: "math"), settings);
     default:
       return _getPageRoute(const HomeView(), settings);
   }
