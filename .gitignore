@@ -19,3 +19,9 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+
+practica_fe.iml
+
+analysis_options.yaml
+
+.idea
