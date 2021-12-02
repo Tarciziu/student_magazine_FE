@@ -4,6 +4,7 @@ import 'package:practica_fe/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+import 'package:practica_fe/extensions/hover_extensions.dart';
 import '../../locator.dart';
 import 'navbar_item_desktop.dart';
 import 'navbar_item_mobile.dart';
@@ -11,7 +12,7 @@ import 'navbar_item_mobile.dart';
 class NavBarItem extends StatelessWidget {
   final String title;
   final String navigationPath;
-  const NavBarItem({Key? key, required this.title, required this.navigationPath});
+  const NavBarItem({Key? key, required this.title, required this.navigationPath}):super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +29,9 @@ class NavBarItem extends StatelessWidget {
       child: Provider.value(
         value: model,
         child: ScreenTypeLayout(
-          tablet: NavBarItemTabletDesktop(),
-          mobile: NavBarItemMobile(),
-        ),
+          tablet: NavBarItemTabletDesktop(model: model,),
+          mobile: NavBarItemMobile(model: model,),
+        ).showCursorOnHover,
       ),
     );
   }
