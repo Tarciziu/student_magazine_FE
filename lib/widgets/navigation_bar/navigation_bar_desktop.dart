@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:practica_fe/routes/route_names.dart';
 import 'package:practica_fe/widgets/navbar_item/navbar_item.dart';
 
-class NavigationBarTabletDesktop extends StatelessWidget {
-  const NavigationBarTabletDesktop({Key? key}) : super(key: key);
+class NavigationBarDesktop extends StatelessWidget {
+  const NavigationBarDesktop({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

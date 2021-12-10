@@ -13,17 +13,17 @@ class AboutDetails extends StatelessWidget {
             ? TextAlign.left
             : TextAlign.left;
         double titleSize =
-        sizingInformation.deviceScreenType == DeviceScreenType.mobile
-            ? 20
-            : 40;
+        sizingInformation.deviceScreenType == DeviceScreenType.desktop
+            ? 40
+            : 20;
 
         double descriptionSize =
-        sizingInformation.deviceScreenType == DeviceScreenType.mobile
-            ? 14
-            : 21;
+        sizingInformation.deviceScreenType == DeviceScreenType.desktop
+            ? 21
+            : 14;
 
         return SizedBox(
-          width: 600,
+          width: 300,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,

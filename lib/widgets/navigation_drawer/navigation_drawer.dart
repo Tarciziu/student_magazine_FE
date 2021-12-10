@@ -14,22 +14,25 @@ class NavigationDrawer extends StatelessWidget {
         child: ListView(
           children: const <Widget>[
             NavigationDrawerHeader(),
-            // BONUS: Combine the UI for this widget with the NavBarItem and make it responsive.
-            // The UI for the current DrawerItem shows when it's in mobile, else it shows the NavBarItem ui.
+
             NavBarItem(
-              title: 'Math',
+              title: 'Acasă',
+              navigationPath: HomeRoute,
+            ),
+            NavBarItem(
+              title: 'Matematică',
               navigationPath: MathRoute,
             ),
             NavBarItem(
-              title: 'ComputerScience',
+              title: 'Informatică',
               navigationPath: ComputerScienceRoute,
             ),
             NavBarItem(
-              title: 'History',
+              title: 'Istorie',
               navigationPath: HistoryRoute,
             ),
             NavBarItem(
-              title: 'About',
+              title: 'Despre',
               navigationPath: AboutRoute,
             ),
           ],
