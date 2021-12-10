@@ -16,9 +16,7 @@ class LayoutTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
-        drawer: sizingInformation.deviceScreenType == DeviceScreenType.mobile
-            ? const NavigationDrawer()
-            : null,
+        drawer: const NavigationDrawer(),
         backgroundColor: Colors.white,
         body: CenteredView(
           child: Column(

@@ -29,7 +29,21 @@ class NavigationBarTabletDesktop extends StatelessWidget {
               SizedBox(
                 width: 60,
               ),
-              NavBarItem(title: 'About', navigationPath: AboutRoute),
+              NavBarItem(
+                title: 'Informatică',
+                navigationPath: ComputerScienceRoute,
+              ),
+              SizedBox(
+                width: 60,
+              ),
+              NavBarItem(
+                title: 'Istorie',
+                navigationPath: HistoryRoute,
+              ),
+              SizedBox(
+                width: 60,
+              ),
+              NavBarItem(title: 'Despre', navigationPath: AboutRoute),
             ],
           )
         ],

@@ -14,16 +14,10 @@ class NavigationDrawerHeader extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: const <Widget>[
           Text(
-            'SKILL UP NOW',
+            'Nume revista',
             style: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white),
           ),
-          Text(
-            'TAP HERE',
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          )
         ],
       ),
     );

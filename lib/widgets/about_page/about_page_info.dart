@@ -11,7 +11,7 @@ class AboutDetails extends StatelessWidget {
         var textAlignment =
         sizingInformation.deviceScreenType == DeviceScreenType.desktop
             ? TextAlign.left
-            : TextAlign.center;
+            : TextAlign.left;
         double titleSize =
         sizingInformation.deviceScreenType == DeviceScreenType.mobile
             ? 20
