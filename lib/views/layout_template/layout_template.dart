@@ -18,19 +18,17 @@ class LayoutTemplate extends StatelessWidget {
       builder: (context, sizingInformation) => Scaffold(
         drawer: const NavigationDrawer(),
         backgroundColor: Colors.white,
-        body: CenteredView(
-          child: Column(
-            children: <Widget>[
-              const NavigationBar(),
-              Expanded(
+        body: Column(
+          children: <Widget>[
+            const NavigationBar(),
+            Expanded(
                 child: Navigator(
                   key: locator<NavigationService>().navigatorKey,
                   onGenerateRoute: generateRoute,
                   initialRoute: HomeRoute,
                 ),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

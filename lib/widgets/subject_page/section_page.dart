@@ -2,33 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:practica_fe/datamodels/card_article_model.dart';
 import 'package:practica_fe/utils/responsive_helper.dart';
 
-class SectionPage extends StatefulWidget {
-  final String section;
+class SectionPageInfo extends StatefulWidget {
+  final String subject;
+  final String subjectImage;
 
-  const SectionPage({Key? key, required this.section}) : super(key: key);
+  const SectionPageInfo(
+      {Key? key, required this.subject, required this.subjectImage})
+      : super(key: key);
 
   @override
-  _SectionPageState createState() => _SectionPageState();
+  _SectionPageInfoState createState() => _SectionPageInfoState();
 }
 
-class _SectionPageState extends State<SectionPage> {
+class _SectionPageInfoState extends State<SectionPageInfo> {
   List<CardArticleModel> _articles = [];
 
   @override
   void initState() {
     super.initState();
-    //_fetchArticles();
+    _fetchArticles();
   }
 
   _fetchArticles() async {
-    List<CardArticleModel> articles = [
+    List<CardArticleModel> list = [
       CardArticleModel(
         title: "Nouă descoperire",
         author: "Ion Amariei",
         navigationPath: 'navigationPath',
         text: "Aici ceva text scurt, nu tot textul",
-        imageUrl:
-            "https://image.shutterstock.com/image-vector/math-horizontal-banner-presentation-website-260nw-1859813464.jpg",
+        imageUrl: "",
         publishedDate: "10/12/2021",
       ),
       CardArticleModel(
@@ -37,21 +39,88 @@ class _SectionPageState extends State<SectionPage> {
         navigationPath: 'navigationPath',
         text: "Aici ceva text scurt, nu tot textul",
         imageUrl:
-            "https://image.shutterstock.com/image-vector/math-horizontal-banner-presentation-website-260nw-1859813464.jpg",
+        "https://media.istockphoto.com/photos/heap-of-wooden-numbers-on-blue-background-picture-id1292684021?b=1&k=20&m=1292684021&s=170667a&w=0&h=5-7WcFt5ibtORzehe4YnPSTZIgUiayWQ3ICRrOibazk=",
+        publishedDate: "10/12/2021",
+      ),
+      CardArticleModel(
+        title: "Nouă descoperire",
+        author: "Ion Amariei",
+        navigationPath: 'navigationPath',
+        text: "Aici ceva text scurt, nu tot textul",
+        imageUrl: "",
+        publishedDate: "10/12/2021",
+      ),
+      CardArticleModel(
+        title: 'Student la UBB, olimpic internațional',
+        author: "George Țirian",
+        navigationPath: 'navigationPath',
+        text: "Aici ceva text scurt, nu tot textul",
+        imageUrl:
+        "https://media.istockphoto.com/photos/heap-of-wooden-numbers-on-blue-background-picture-id1292684021?b=1&k=20&m=1292684021&s=170667a&w=0&h=5-7WcFt5ibtORzehe4YnPSTZIgUiayWQ3ICRrOibazk=",
+        publishedDate: "10/12/2021",
+      ),
+      CardArticleModel(
+        title: "Nouă descoperire",
+        author: "Ion Amariei",
+        navigationPath: 'navigationPath',
+        text: "Aici ceva text scurt, nu tot textul",
+        imageUrl: "",
+        publishedDate: "10/12/2021",
+      ),
+      CardArticleModel(
+        title: 'Student la UBB, olimpic internațional',
+        author: "George Țirian",
+        navigationPath: 'navigationPath',
+        text: "Aici ceva text scurt, nu tot textul",
+        imageUrl:
+        "https://media.istockphoto.com/photos/heap-of-wooden-numbers-on-blue-background-picture-id1292684021?b=1&k=20&m=1292684021&s=170667a&w=0&h=5-7WcFt5ibtORzehe4YnPSTZIgUiayWQ3ICRrOibazk=",
+        publishedDate: "10/12/2021",
+      ),
+      CardArticleModel(
+        title: "Nouă descoperire",
+        author: "Ion Amariei",
+        navigationPath: 'navigationPath',
+        text: "Aici ceva text scurt, nu tot textul",
+        imageUrl: "",
+        publishedDate: "10/12/2021",
+      ),
+      CardArticleModel(
+        title: 'Student la UBB, olimpic internațional',
+        author: "George Țirian",
+        navigationPath: 'navigationPath',
+        text: "Aici ceva text scurt, nu tot textul",
+        imageUrl:
+        "https://media.istockphoto.com/photos/heap-of-wooden-numbers-on-blue-background-picture-id1292684021?b=1&k=20&m=1292684021&s=170667a&w=0&h=5-7WcFt5ibtORzehe4YnPSTZIgUiayWQ3ICRrOibazk=",
+        publishedDate: "10/12/2021",
+      ),
+      CardArticleModel(
+        title: "Nouă descoperire",
+        author: "Ion Amariei",
+        navigationPath: 'navigationPath',
+        text: "Aici ceva text scurt, nu tot textul",
+        imageUrl: "",
+        publishedDate: "10/12/2021",
+      ),
+      CardArticleModel(
+        title: 'Student la UBB, olimpic internațional',
+        author: "George Țirian",
+        navigationPath: 'navigationPath',
+        text: "Aici ceva text scurt, nu tot textul",
+        imageUrl:
+        "https://media.istockphoto.com/photos/heap-of-wooden-numbers-on-blue-background-picture-id1292684021?b=1&k=20&m=1292684021&s=170667a&w=0&h=5-7WcFt5ibtORzehe4YnPSTZIgUiayWQ3ICRrOibazk=",
         publishedDate: "10/12/2021",
       ),
     ];
-    // await APIService().fetchArticlesBySection('technology');
     setState(() {
-      _articles = articles;
+      _articles = list;
     });
   }
 
   _buildArticlesGrid(MediaQueryData mediaQuery) {
     List<GridTile> tiles = [];
-    _articles.forEach((article) {
+    for (var article in _articles) {
       tiles.add(_buildArticleTile(article, mediaQuery));
-    });
+    }
     return Padding(
       padding: responsivePadding(mediaQuery),
       child: GridView.count(
@@ -59,7 +128,7 @@ class _SectionPageState extends State<SectionPage> {
         mainAxisSpacing: 30.0,
         crossAxisSpacing: 30.0,
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         children: tiles,
       ),
     );
@@ -68,8 +137,8 @@ class _SectionPageState extends State<SectionPage> {
   _buildArticleTile(CardArticleModel article, MediaQueryData mediaQuery) {
     return GridTile(
       child: GestureDetector(
-        onTap: () => {
-          // TODO navigation path to see the content of the post
+        onTap: () {
+          //TODO
         },
         child: Column(
           children: <Widget>[
@@ -83,7 +152,7 @@ class _SectionPageState extends State<SectionPage> {
                   topRight: Radius.circular(20.0),
                 ),
                 image: DecorationImage(
-                  image: NetworkImage(article.imageUrl),
+                  image: NetworkImage(article.imageUrl != "" ? article.imageUrl : widget.subjectImage),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -126,15 +195,19 @@ class _SectionPageState extends State<SectionPage> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    _fetchArticles();
     return Scaffold(
-        body: Expanded(
-      child: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return _buildArticlesGrid(mediaQuery);
-        },
-        itemCount: _articles.length,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: <Widget>[
+            const SizedBox(height: 15.0),
+            _articles.isNotEmpty
+                ? _buildArticlesGrid(mediaQuery)
+                : const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

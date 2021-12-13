@@ -9,7 +9,7 @@ class NavBarItemTabletDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       model.title,
-      style: const TextStyle(fontSize: 18),
+      style: const TextStyle(fontSize: 18, color: Colors.white),
     );
   }
 

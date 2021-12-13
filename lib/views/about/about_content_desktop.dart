@@ -8,6 +8,9 @@ class AboutContentDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: const <Widget>[
+        SizedBox(
+          width: 60,
+        ),
         AboutDetails(),
       ],
     );
