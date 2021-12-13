@@ -27,13 +27,13 @@ int responsiveNumGridTiles(MediaQueryData mediaQuery) {
 double responsiveImageHeight(MediaQueryData mediaQuery) {
   double deviceWidth = mediaQuery.size.width;
   if (deviceWidth < 700) {
-    return 250.0;
+    return 150.0;
   } else if (deviceWidth < 1200) {
-    return mediaQuery.size.width * 0.25;
-  } else if (deviceWidth < 1650) {
     return mediaQuery.size.width * 0.2;
+  } else if (deviceWidth < 1650) {
+    return mediaQuery.size.width * 0.15;
   }
-  return mediaQuery.size.width * 0.15;
+  return mediaQuery.size.width * 0.1;
 }
 
 double responsiveTitleHeight(MediaQueryData mediaQuery) {
