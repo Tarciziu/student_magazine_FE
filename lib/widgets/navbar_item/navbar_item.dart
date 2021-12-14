@@ -29,7 +29,8 @@ class NavBarItem extends StatelessWidget {
       child: Provider.value(
         value: model,
         child: ScreenTypeLayout(
-          tablet: NavBarItemTabletDesktop(model: model,),
+          desktop: NavBarItemDesktop(model: model,),
+          tablet: NavBarItemMobile(model: model,),
           mobile: NavBarItemMobile(model: model,),
         ).showCursorOnHover.moveUpOnHover,
       ),

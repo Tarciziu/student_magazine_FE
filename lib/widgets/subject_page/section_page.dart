@@ -125,10 +125,9 @@ class _SectionPageInfoState extends State<SectionPageInfo> {
       padding: responsivePadding(mediaQuery),
       child: GridView.count(
         crossAxisCount: responsiveNumGridTiles(mediaQuery),
-        mainAxisSpacing: 30.0,
         crossAxisSpacing: 30.0,
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
+        //physics: const NeverScrollableScrollPhysics(),
         children: tiles,
       ),
     );

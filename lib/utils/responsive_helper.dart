@@ -29,11 +29,11 @@ double responsiveImageHeight(MediaQueryData mediaQuery) {
   if (deviceWidth < 700) {
     return 150.0;
   } else if (deviceWidth < 1200) {
-    return mediaQuery.size.width * 0.2;
-  } else if (deviceWidth < 1650) {
     return mediaQuery.size.width * 0.15;
+  } else if (deviceWidth < 1650) {
+    return mediaQuery.size.width * 0.1;
   }
-  return mediaQuery.size.width * 0.1;
+  return mediaQuery.size.width * 0.05;
 }
 
 double responsiveTitleHeight(MediaQueryData mediaQuery) {
