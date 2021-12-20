@@ -11,19 +11,19 @@ class AboutDetails extends StatelessWidget {
         var textAlignment =
         sizingInformation.deviceScreenType == DeviceScreenType.desktop
             ? TextAlign.left
-            : TextAlign.center;
+            : TextAlign.left;
         double titleSize =
-        sizingInformation.deviceScreenType == DeviceScreenType.mobile
-            ? 20
-            : 40;
+        sizingInformation.deviceScreenType == DeviceScreenType.desktop
+            ? 40
+            : 20;
 
         double descriptionSize =
-        sizingInformation.deviceScreenType == DeviceScreenType.mobile
-            ? 14
-            : 21;
+        sizingInformation.deviceScreenType == DeviceScreenType.desktop
+            ? 21
+            : 14;
 
         return SizedBox(
-          width: 600,
+          width: 300,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +42,7 @@ class AboutDetails extends StatelessWidget {
               Text(
                 'Front-End:\n       Balotă George\n       Gologan Christin-Tarciziu\n'
                     'Back-End:\n       Dochițoiu Edoardo-Eugenio\n       '
-                    'Istudor Delia\n       Salló Attila',
+                    'Istudor Delia\n       Salló Attila\n       Șarpe Tudor',
                 style: TextStyle(
                   fontSize: descriptionSize,
                   height: 1.7,

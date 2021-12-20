@@ -8,7 +8,10 @@ class HomeContentDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: const <Widget>[
-        CourseDetails(),
+        SizedBox(
+          width: 60,
+        ),
+        HomeDetails(),
       ],
     );
   }

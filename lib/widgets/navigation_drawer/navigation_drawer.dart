@@ -8,28 +8,35 @@ class NavigationDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 16),
-        ],
-      ),
-      child: Column(
-        children: const <Widget>[
-          NavigationDrawerHeader(),
-          // BONUS: Combine the UI for this widget with the NavBarItem and make it responsive.
-          // The UI for the current DrawerItem shows when it's in mobile, else it shows the NavBarItem ui.
-          NavBarItem(
-            title: 'Math',
-            navigationPath: MathRoute,
-          ),
-          NavBarItem(
-            title: 'About',
-            navigationPath: AboutRoute,
-          ),
-        ],
+    return Drawer(
+      child: Material(
+        color: const Color.fromRGBO(0,0,0,0),
+        child: ListView(
+          children: const <Widget>[
+            NavigationDrawerHeader(),
+
+            NavBarItem(
+              title: 'Acasă',
+              navigationPath: HomeRoute,
+            ),
+            NavBarItem(
+              title: 'Matematică',
+              navigationPath: MathRoute,
+            ),
+            NavBarItem(
+              title: 'Informatică',
+              navigationPath: ComputerScienceRoute,
+            ),
+            NavBarItem(
+              title: 'Istorie',
+              navigationPath: HistoryRoute,
+            ),
+            NavBarItem(
+              title: 'Despre',
+              navigationPath: AboutRoute,
+            ),
+          ],
+        ),
       ),
     );
   }

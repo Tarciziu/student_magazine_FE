@@ -16,23 +16,19 @@ class LayoutTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
-        drawer: sizingInformation.deviceScreenType == DeviceScreenType.mobile
-            ? const NavigationDrawer()
-            : null,
+        drawer: const NavigationDrawer(),
         backgroundColor: Colors.white,
-        body: CenteredView(
-          child: Column(
-            children: <Widget>[
-              const NavigationBar(),
-              Expanded(
+        body: Column(
+          children: <Widget>[
+            const NavigationBar(),
+            Expanded(
                 child: Navigator(
                   key: locator<NavigationService>().navigatorKey,
                   onGenerateRoute: generateRoute,
                   initialRoute: HomeRoute,
                 ),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

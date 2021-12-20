@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class CourseDetails extends StatelessWidget {
-  const CourseDetails({Key? key}) : super(key: key);
+class HomeDetails extends StatelessWidget {
+  const HomeDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +13,14 @@ class CourseDetails extends StatelessWidget {
                 ? TextAlign.left
                 : TextAlign.center;
         double titleSize =
-            sizingInformation.deviceScreenType == DeviceScreenType.mobile
-                ? 50
-                : 80;
+            sizingInformation.deviceScreenType == DeviceScreenType.desktop
+                ? 80
+                : 50;
 
         double descriptionSize =
-            sizingInformation.deviceScreenType == DeviceScreenType.mobile
-                ? 16
-                : 21;
+            sizingInformation.deviceScreenType == DeviceScreenType.desktop
+                ? 21
+                : 16;
 
         return SizedBox(
           width: 600,
