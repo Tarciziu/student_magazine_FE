@@ -93,6 +93,7 @@ class LoginContentDesktop extends StatelessWidget {
           height: 30,
         ),
         TextField(
+          obscureText: true,
           decoration: InputDecoration(
             hintText: 'Password',
             counterText: 'Ai uitat parola?',
