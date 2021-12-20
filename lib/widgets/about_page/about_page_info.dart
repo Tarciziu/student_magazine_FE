@@ -42,7 +42,7 @@ class AboutDetails extends StatelessWidget {
               Text(
                 'Front-End:\n       Balotă George\n       Gologan Christin-Tarciziu\n'
                     'Back-End:\n       Dochițoiu Edoardo-Eugenio\n       '
-                    'Istudor Delia\n       Salló Attila',
+                    'Istudor Delia\n       Salló Attila\n       Șarpe Tudor',
                 style: TextStyle(
                   fontSize: descriptionSize,
                   height: 1.7,

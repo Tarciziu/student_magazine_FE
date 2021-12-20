@@ -10,7 +10,7 @@ class BlueShadowOnHover extends StatefulWidget {
 
 class _BlueShadowOnHoverState extends State<BlueShadowOnHover> {
   final nonHoverTransform = const BoxShadow(
-    color: Colors.black12,
+    color: Colors.white,
     offset: Offset(0, 1),
     blurRadius: 6.0,
   );

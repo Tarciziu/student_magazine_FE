@@ -104,13 +104,13 @@ class SubjectPageDetails extends StatelessWidget {
   _buildArticleTile(CardArticleModel card, MediaQueryData mediaQuery) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-      child: Container(
+      child: SizedBox(
         width: mediaQuery.size.width * 0.94,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0.0),
           ),
-          color: Colors.white70,
+          color: Colors.white,
           elevation: 10,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +129,8 @@ class SubjectPageDetails extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(
+                  Container(
+                    color: Colors.transparent,
                     width: mediaQuery.size.width * 0.5,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
@@ -142,8 +143,9 @@ class SubjectPageDetails extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: mediaQuery.size.width * 0.5,
+                  Container(
+                    color: Colors.transparent,
+                    width: mediaQuery.size.width * 0.7,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                       child: Text(
@@ -159,7 +161,7 @@ class SubjectPageDetails extends StatelessWidget {
             ],
           ),
         ),
-      ).blueShadowOnHover,
+      ).blueShadowOnHover.showCursorOnHover,
     );
   }
 
