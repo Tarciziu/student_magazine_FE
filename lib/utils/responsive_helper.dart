@@ -47,3 +47,30 @@ double responsiveTitleHeight(MediaQueryData mediaQuery) {
   }
   return mediaQuery.size.width * 0.05;
 }
+
+double responsiveWordsNum(MediaQueryData mediaQuery) {
+  double deviceWidth = mediaQuery.size.width;
+  if (deviceWidth < 700) {
+    return 30;
+  } else if (deviceWidth < 1200) {
+    return 120;
+  } else if (deviceWidth < 1650) {
+    return 200;
+  }
+  return 300;
+}
+
+String firstFewWords(MediaQueryData mediaQuery, String bigSentence){
+
+  int startIndex = 0, indexOfSpace = 0;
+
+  for(int i = 0; i < responsiveWordsNum(mediaQuery); i++){
+    indexOfSpace = bigSentence.indexOf(' ', startIndex);
+    if(indexOfSpace == -1){     //-1 is when character is not found
+      return bigSentence;
+    }
+    startIndex = indexOfSpace + 1;
+  }
+
+  return bigSentence.substring(0, indexOfSpace) + '...';
+}

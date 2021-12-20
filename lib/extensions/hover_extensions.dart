@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:practica_fe/extensions/hover/blueshadow_on_hover.dart';
 import "dart:html" as html;
 
-import 'translate_on_hover.dart';
+import 'hover/translate_on_hover.dart';
 
 extension HoverExtensions on Widget {
   static final appContainer = html.window.document.getElementById('app-container');
@@ -16,6 +17,12 @@ extension HoverExtensions on Widget {
 
   Widget get moveUpOnHover {
     return TranslateOnHover(
+      child: this,
+    );
+  }
+
+  Widget get blueShadowOnHover {
+    return BlueShadowOnHover(
       child: this,
     );
   }

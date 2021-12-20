@@ -29,10 +29,10 @@ class NavBarItem extends StatelessWidget {
       child: Provider.value(
         value: model,
         child: ScreenTypeLayout(
-          desktop: NavBarItemDesktop(model: model,),
+          desktop: NavBarItemDesktop(model: model,).showCursorOnHover.moveUpOnHover,
           tablet: NavBarItemMobile(model: model,),
           mobile: NavBarItemMobile(model: model,),
-        ).showCursorOnHover.moveUpOnHover,
+        ),
       ),
     );
   }

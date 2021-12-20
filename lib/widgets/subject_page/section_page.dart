@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practica_fe/datamodels/card_article_model.dart';
+import 'package:practica_fe/extensions/hover_extensions.dart';
 import 'package:practica_fe/utils/responsive_helper.dart';
 
 class SectionPageInfo extends StatefulWidget {
@@ -121,9 +122,16 @@ class _SectionPageInfoState extends State<SectionPageInfo> {
     for (var article in _articles) {
       tiles.add(_buildArticleTile(article, mediaQuery));
     }
+
+    var size = MediaQuery.of(context).size;
+
+    final double itemHeight = size.height/ 2;
+    final double itemWidth = size.width / 2;
+
     return Padding(
       padding: responsivePadding(mediaQuery),
       child: GridView.count(
+        childAspectRatio: (itemWidth / itemHeight),
         crossAxisCount: responsiveNumGridTiles(mediaQuery),
         crossAxisSpacing: 30.0,
         shrinkWrap: true,
@@ -140,6 +148,7 @@ class _SectionPageInfoState extends State<SectionPageInfo> {
           //TODO
         },
         child: Column(
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Container(
               height: responsiveImageHeight(mediaQuery),
@@ -187,7 +196,7 @@ class _SectionPageInfoState extends State<SectionPageInfo> {
             ),
           ],
         ),
-      ),
+      ).blueShadowOnHover,
     );
   }
 
