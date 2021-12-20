@@ -50,6 +50,14 @@ class NavigationBarDesktop extends StatelessWidget {
               ),
               NavBarItem(title: 'Despre', navigationPath: AboutRoute),
             ],
+          ),
+          Row(
+            children: const [
+              NavBarItem(
+                title: 'Login',
+                navigationPath: LoginRoute,
+              ),
+            ],
           )
         ],
       ),
