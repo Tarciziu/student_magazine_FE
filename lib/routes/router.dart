@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:practica_fe/constants/section_default_images.dart';
 import 'package:practica_fe/views/about/about_view.dart';
 import 'package:practica_fe/views/home/home_view.dart';
+import 'package:practica_fe/views/register/register_view.dart';
 import 'package:practica_fe/views/subject/subject_view.dart';
 
 import 'route_names.dart';
@@ -18,6 +19,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(const SubjectView(subject: "computerScience", subjectImage: computerScienceUrl,), settings);
      case HistoryRoute:
       return _getPageRoute(const SubjectView(subject: "history", subjectImage: mathUrl,), settings);
+     case RegisterRoute:
+      return _getPageRoute(const RegisterView(), settings);
     default:
       return _getPageRoute(const HomeView(), settings);
   }
