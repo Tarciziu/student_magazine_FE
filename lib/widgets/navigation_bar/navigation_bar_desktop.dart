@@ -52,7 +52,7 @@ class NavigationBarDesktop extends StatelessWidget {
             ],
           ),
           NavBarItem(
-            title: 'Create article',
+            title: 'Articol nou',
             navigationPath: CreateArticleRoute,
           ),
           SizedBox(

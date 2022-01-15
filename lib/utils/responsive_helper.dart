@@ -76,5 +76,5 @@ String firstFewWords(MediaQueryData mediaQuery, String bigSentence){
 }
 
 double responsiveHtmlEditorHeight(MediaQueryData mediaQuery) {
-  return mediaQuery.size.height * 0.3;
+  return mediaQuery.size.height * 0.6;
 }
