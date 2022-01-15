@@ -16,7 +16,7 @@ class LayoutTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
-        drawer: const NavigationDrawer(),
+        drawer: MediaQuery.of(context).size.width <1100 ? const NavigationDrawer():null,
         backgroundColor: Colors.white,
         body: Column(
           children: <Widget>[

@@ -50,7 +50,14 @@ class NavigationBarDesktop extends StatelessWidget {
               ),
               NavBarItem(title: 'Despre', navigationPath: AboutRoute),
             ],
-          )
+          ),
+          NavBarItem(
+            title: 'Create article',
+            navigationPath: CreateArticleRoute,
+          ),
+          SizedBox(
+            width: 60,
+          ),
         ],
       ),
     );
