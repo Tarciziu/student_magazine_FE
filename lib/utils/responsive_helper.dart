@@ -74,3 +74,7 @@ String firstFewWords(MediaQueryData mediaQuery, String bigSentence){
 
   return bigSentence.substring(0, indexOfSpace) + '...';
 }
+
+double responsiveHtmlEditorHeight(MediaQueryData mediaQuery) {
+  return mediaQuery.size.height * 0.3;
+}

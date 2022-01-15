@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
+import 'package:practica_fe/utils/responsive_helper.dart';
 
 class CreateArticleContentDesktop extends StatefulWidget {
   const CreateArticleContentDesktop({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _CreateArticleContentDesktopState
     extends State<CreateArticleContentDesktop> {
   final HtmlEditorController controller = HtmlEditorController();
   final TextEditingController _titleController = TextEditingController();
+  String selectedOccasion = "Secțiune";
 
   @override
   Widget build(BuildContext context) {
@@ -24,46 +26,75 @@ class _CreateArticleContentDesktopState
         }
       },
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-        child:  Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-                    TextField(
-                      controller: _titleController,
-                      decoration: InputDecoration(
-                        hintText: 'Article title here...',
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20.0))),
-                      ),
-                    ),
-                    DropdownButton<String>(
-                      items: <String>['A', 'B', 'C', 'D'].map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (_) {},
-                    ),
-              SizedBox(
-                height: 60,
-              ),
-              HtmlEditor(
-                controller: controller, //required
-                htmlEditorOptions: HtmlEditorOptions(
-                  hint: "Conținutul articolului tău aici...",
-                  shouldEnsureVisible: true,
-                  //initialText: "Your text here...",
-                  characterLimit: 64000,
+        padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+        child: SingleChildScrollView(child:Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: [
+                Text("Titlu:",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
-                otherOptions: OtherOptions(
-                  height: 200,
+                SizedBox(
+                  width: 20,
                 ),
+                Container(
+                  height: 50.0,
+                  width: 300.0,
+                  child: TextField(
+                    controller: _titleController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10.0))),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                DropdownButton<String>(
+                  itemHeight: 100.0,
+                  value: selectedOccasion,
+                  items: <String>[
+                    'Secțiune',
+                    'Matematică',
+                    'Informatică',
+                    'Istorie'
+                  ].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      selectedOccasion = newValue!;
+                    });
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            HtmlEditor(
+              controller: controller, //required
+              htmlEditorOptions: HtmlEditorOptions(
+                hint: "Conținutul articolului tău aici...",
+                shouldEnsureVisible: true,
+                //initialText: "Your text here...",
+                characterLimit: 64000,
               ),
-            ],
-          ),
+              otherOptions: OtherOptions(
+                height: responsiveHtmlEditorHeight(MediaQuery.of(context)),
+              ),
+            ),
+          ],
         ),
+      ),),
     );
   }
 }
