@@ -1,7 +1,17 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
-class LoginContentDesktop extends StatelessWidget {
+class LoginContentDesktop extends StatefulWidget {
   const LoginContentDesktop({Key? key}) : super(key: key);
+
+  @override
+  State<LoginContentDesktop> createState() => _LoginContentDesktopState();
+}
+
+class _LoginContentDesktopState extends State<LoginContentDesktop> {
+  bool showPassword = false;
+  Color passwordIconColor = Colors.grey;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +80,7 @@ class LoginContentDesktop extends StatelessWidget {
       children: [
         TextField(
           decoration: InputDecoration(
-            hintText: 'Introduce email',
+            hintText: 'Email',
             fillColor: Colors.blueGrey[50],
             filled: true,
             labelStyle: const TextStyle(fontSize: 12),
@@ -93,13 +103,29 @@ class LoginContentDesktop extends StatelessWidget {
           height: 30,
         ),
         TextField(
-          obscureText: true,
+          obscureText: showPassword,
           decoration: InputDecoration(
-            hintText: 'Password',
+            hintText: 'Parola',
             counterText: 'Ai uitat parola?',
-            suffixIcon: const Icon(
-              Icons.visibility_off_outlined,
-              color: Colors.grey,
+            suffixIcon: GestureDetector(
+              onTapDown: (_) {
+                setState(() {
+                  showPassword = false;
+                  passwordIconColor = Colors.deepPurple;
+                });
+              },
+              onTapUp: (_) {
+                setState(() {
+                  showPassword = true;
+                  passwordIconColor = Colors.grey;
+                });
+              },
+              child: Container(
+                child: Icon(
+                  Icons.visibility_off_outlined,
+                  color: passwordIconColor,
+                ),
+              ),
             ),
             fillColor: Colors.blueGrey[50],
             filled: true,

@@ -57,6 +57,9 @@ class NavigationBarDesktop extends StatelessWidget {
                 title: 'Login',
                 navigationPath: LoginRoute,
               ),
+              SizedBox(
+                width: 60,
+              )
             ],
           )
         ],
