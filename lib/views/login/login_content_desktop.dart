@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:practica_fe/main.dart';
+import 'package:practica_fe/widgets/navigation_bar/navigation_bar_desktop.dart';
 
 import '../../locator.dart';
 import '../../services/navigation_service.dart';
@@ -206,6 +207,8 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
                     FlutterSession().set('email', value);
                     FlutterSession().set('logged', true);
                     GlobalData.email = value;
+                    GlobalData.logged = true;
+
                     Fluttertoast.showToast(
                         msg: "Logged in as $value",
                         toastLength: Toast.LENGTH_SHORT,

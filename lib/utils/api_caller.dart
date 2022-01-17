@@ -1,8 +1,14 @@
 import 'dart:convert';
+import 'dart:html';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
+import 'package:practica_fe/views/layout_template/layout_template.dart';
+import 'package:practica_fe/widgets/navigation_bar/navigation_bar.dart';
+import 'package:practica_fe/widgets/navigation_bar/navigation_bar_desktop.dart';
+
+import '../main.dart';
 
 class Caller {
   var dio = Dio();
@@ -34,13 +40,14 @@ class Caller {
         options: Options(
           headers: {
             HttpHeaders.contentTypeHeader: "application/json",
-            HttpHeaders.accessControlAllowOriginHeader: "*"
           },
         ),
         data: data,
       );
+      navBar.MyState.refresh();
       return response.data['email'].toString();
     } catch (ex) {
+      print(ex.toString());
       return 'server error...';
     }
   }

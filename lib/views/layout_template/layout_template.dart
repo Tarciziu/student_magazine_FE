@@ -10,6 +10,8 @@ import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../locator.dart';
 
+var navBar = NavBar.NavigationBar();
+
 class LayoutTemplate extends StatelessWidget {
   const LayoutTemplate({Key? key}) : super(key: key);
 
@@ -21,7 +23,7 @@ class LayoutTemplate extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Column(
           children: <Widget>[
-            const NavBar.NavigationBar(),
+            navBar,
             Expanded(
               child: Navigator(
                 key: locator<NavigationService>().navigatorKey,
