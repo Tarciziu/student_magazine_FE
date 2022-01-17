@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practica_fe/constants/app_colors.dart';
+import 'package:practica_fe/main.dart';
 import 'package:practica_fe/routes/route_names.dart';
 import 'package:practica_fe/widgets/navbar_item/navbar_item.dart';
 
@@ -52,15 +53,25 @@ class NavigationBarDesktop extends StatelessWidget {
             ],
           ),
           Row(
-            children: const [
-              NavBarItem(
-                title: 'Login',
-                navigationPath: LoginRoute,
-              ),
-              SizedBox(
-                width: 60,
-              )
-            ],
+            children: GlobalData.email == 'none'
+                ? [
+                    const NavBarItem(
+                      title: 'Login',
+                      navigationPath: LoginRoute,
+                    ),
+                    const SizedBox(
+                      width: 60,
+                    )
+                  ]
+                : [
+                    const NavBarItem(
+                      title: 'Log out',
+                      navigationPath: LoginRoute,
+                    ),
+                    const SizedBox(
+                      width: 60,
+                    )
+                  ],
           )
         ],
       ),

@@ -1,6 +1,12 @@
-import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:practica_fe/main.dart';
+
+import '../../locator.dart';
+import '../../services/navigation_service.dart';
+import '../../utils/api_caller.dart';
 
 class LoginContentDesktop extends StatefulWidget {
   const LoginContentDesktop({Key? key}) : super(key: key);
@@ -12,6 +18,9 @@ class LoginContentDesktop extends StatefulWidget {
 class _LoginContentDesktopState extends State<LoginContentDesktop> {
   bool showPassword = false;
   Color passwordIconColor = Colors.grey;
+
+  final _eController = TextEditingController();
+  final _pController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +75,8 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
               ),
             ),
             Expanded(
-              child: _loginForm(),
+              child: _loginForm(
+                  eController: _eController, pController: _pController),
             )
           ],
         ),
@@ -74,11 +84,16 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
     );
   }
 
-  Widget _loginForm() {
+  Widget _loginForm({eController, pController}) {
+    var email = "";
+    var password = "";
+
+    Caller caller = Caller();
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextField(
+          controller: eController,
           decoration: InputDecoration(
             hintText: 'Email',
             fillColor: Colors.blueGrey[50],
@@ -103,6 +118,7 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
           height: 30,
         ),
         TextField(
+          controller: _pController,
           obscureText: showPassword,
           decoration: InputDecoration(
             hintText: 'Parola',
@@ -181,7 +197,37 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            onPressed: () {},
+            onPressed: () async {
+              email = _eController.text;
+              password = _pController.text;
+              caller.loginRequest(email: email, password: password).then(
+                (value) async {
+                  if (value != 'server error...') {
+                    FlutterSession().set('email', value);
+                    FlutterSession().set('logged', true);
+                    GlobalData.email = value;
+                    Fluttertoast.showToast(
+                        msg: "Logged in as $value",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 3,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                    locator<NavigationService>().navigateTo('home');
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: value,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 3,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  }
+                },
+              );
+            },
           ),
         )
       ],
