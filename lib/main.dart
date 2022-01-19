@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 import 'package:practica_fe/views/layout_template/layout_template.dart';
 
 import 'locator.dart';
 
-void main() {
+void main() async {
+  FlutterSession().set('logged', false);
   setupLocator();
   runApp(const MyApp());
 }
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Revista',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -22,4 +25,9 @@ class MyApp extends StatelessWidget {
       home: const LayoutTemplate(),
     );
   }
+}
+
+class GlobalData {
+  static String email = 'none';
+  static bool logged = false;
 }
