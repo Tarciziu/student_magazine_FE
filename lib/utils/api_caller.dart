@@ -54,13 +54,14 @@ class Caller {
     }
   }
 
-  Future<List<CardArticleModel>> getArticlesBySectionRequest(String section) async {
+  Future<List<CardArticleModel>> getArticlesBySectionRequest(
+      String section) async {
     var params = {"section": section};
     var URL = baseUrl + 'articles/section/';
     var data = jsonEncode(params);
     logger.i(
         'Trying getArticlesBySection for SECTION = { $section }  on URL = { $URL } DATA = $data');
-    try {
+    try{
       var response = await dio.get(
         URL + section,
         options: Options(
@@ -69,13 +70,18 @@ class Caller {
           },
         ),
       );
-      List<CardArticleModel> rez = [];
 
-      Iterable data = json.decode(jsonEncode(response.data));
-      return List.from(data.map((e) => CardArticleModel.fromJSON(e)));
+      if (response.statusCode == 200) {
+        List<CardArticleModel> rez = [];
+        Iterable data = json.decode(jsonEncode(response.data));
+        return List.from(data.map((e) => CardArticleModel.fromJSON(e)));
+      }
+
+      return List.empty();
+
     } catch (ex) {
-      print(ex);
       return List.empty();
     }
+
   }
 }
