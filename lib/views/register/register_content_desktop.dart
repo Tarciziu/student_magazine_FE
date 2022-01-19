@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:practica_fe/services/navigation_service.dart';
+import 'package:practica_fe/utils/api_caller.dart';
+
+import '../../locator.dart';
 
 class RegisterContentDesktop extends StatefulWidget {
   const RegisterContentDesktop({Key? key}) : super(key: key);
@@ -12,7 +17,9 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
   TextEditingController _lastnameController = new TextEditingController();
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
-  TextEditingController _confirmPasswordController = new TextEditingController();
+  TextEditingController _confirmPasswordController =
+      new TextEditingController();
+  String pickedDate = "Data nașterii";
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +109,7 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 20,
         ),
         TextField(
           controller: _lastnameController,
@@ -127,7 +134,7 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 20,
         ),
         TextField(
           controller: _emailController,
@@ -152,7 +159,7 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 20,
         ),
         TextField(
           controller: _passwordController,
@@ -178,7 +185,7 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 20,
         ),
         TextField(
           controller: _confirmPasswordController,
@@ -204,7 +211,41 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
           ),
         ),
         const SizedBox(
-          height: 40,
+          height: 20,
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            var choice = await showDatePicker(
+              helpText: pickedDate,
+                context: context,
+                firstDate: DateTime(1900),
+                lastDate: DateTime.now(),
+                initialDate: DateTime.now(),
+                builder: (BuildContext context, Widget? child) {
+                  return Center(
+                      child: SizedBox(
+                        width: 400.0,
+                        height: 500.0,
+                        child: child,
+                      ));
+                });
+
+            setState(() {
+              pickedDate = choice.toString().substring(0,10);
+            });
+          },
+          child: Container(
+            width: 200.0,
+            child: Center(
+              child: Text(
+                pickedDate,
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 20,
         ),
         Container(
           decoration: BoxDecoration(
@@ -239,9 +280,62 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            onPressed: () {},
+            onPressed: () async {
+              var email = _emailController.text;
+              var password = _passwordController.text;
+              var confPassword = _confirmPasswordController.text;
+              var firstName = _firstnameController.text;
+              var lastName = _lastnameController.text;
+              var birthday = pickedDate.toString();
+              print(birthday);
+              if (email.isNotEmpty &&
+                  password.length >= 6 &&
+                  confPassword == password &&
+                  firstName.isNotEmpty &&
+                  lastName.isNotEmpty &&
+                  birthday.isNotEmpty) {
+                Caller()
+                    .registerRequest(
+                        email: email,
+                        password: password,
+                        firstname: firstName,
+                        lastname: lastName,
+                        birthday: birthday)
+                    .then((value) async {
+                  if (value != 'server error...') {
+                    Fluttertoast.showToast(
+                        msg: "Account created in as $value",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 3,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                    locator<NavigationService>().navigateTo('login');
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: value,
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 3,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  }
+                });
+              } else {
+                Fluttertoast.showToast(
+                    msg: "Invalid registration informations",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 3,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              }
+            },
           ),
-        )
+        ),
       ],
     );
   }

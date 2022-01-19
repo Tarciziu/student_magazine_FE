@@ -63,6 +63,13 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
             children: GlobalData.logged == false
                 ? [
                     const NavBarItem(
+                      title: 'Register',
+                      navigationPath: RegisterRoute,
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    const NavBarItem(
                       title: 'Login',
                       navigationPath: LoginRoute,
                     ),
