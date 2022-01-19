@@ -3,21 +3,40 @@ import 'package:practica_fe/constants/section_default_images.dart';
 import 'package:practica_fe/views/about/about_view.dart';
 import 'package:practica_fe/views/home/home_view.dart';
 import 'package:practica_fe/views/subject/subject_view.dart';
+import 'package:practica_fe/widgets/subject_page/section_page.dart';
 
+import '../views/login/login_view.dart';
 import 'route_names.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case HomeRoute:
       return _getPageRoute(const HomeView(), settings);
+    case LoginRoute:
+      return _getPageRoute(const LoginView(), settings);
     case AboutRoute:
       return _getPageRoute(const AboutView(), settings);
     case MathRoute:
-      return _getPageRoute(const SubjectView(subject: "math", subjectImage: mathUrl,), settings);
-     case ComputerScienceRoute:
-      return _getPageRoute(const SubjectView(subject: "computerScience", subjectImage: computerScienceUrl,), settings);
-     case HistoryRoute:
-      return _getPageRoute(const SubjectView(subject: "history", subjectImage: mathUrl,), settings);
+      return _getPageRoute(
+          const SectionPageInfo(
+            subject: "math",
+            subjectImage: mathUrl,
+          ),
+          settings);
+    case ComputerScienceRoute:
+      return _getPageRoute(
+          const SubjectView(
+            subject: "computerScience",
+            subjectImage: mathUrl,
+          ),
+          settings);
+    case HistoryRoute:
+      return _getPageRoute(
+          const SubjectView(
+            subject: "history",
+            subjectImage: mathUrl,
+          ),
+          settings);
     default:
       return _getPageRoute(const HomeView(), settings);
   }
