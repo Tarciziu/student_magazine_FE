@@ -16,7 +16,7 @@ class LoginContentDesktop extends StatefulWidget {
 }
 
 class _LoginContentDesktopState extends State<LoginContentDesktop> {
-  bool showPassword = false;
+  bool showPassword = true;
   Color passwordIconColor = Colors.grey;
 
   final _eController = TextEditingController();
