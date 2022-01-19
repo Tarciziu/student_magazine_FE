@@ -18,10 +18,9 @@ class _NavigationBarState extends State<NavigationBar> {
     // TODO: implement initState
     super.initState();
   }
-  void refresh(){
-    setState(() {
 
-    });
+  void refresh() {
+    setState(() {});
   }
 
   @override

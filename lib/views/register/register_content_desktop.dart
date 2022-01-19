@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_session/flutter_session.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:practica_fe/main.dart';
-import 'package:practica_fe/widgets/navigation_bar/navigation_bar_desktop.dart';
 
-import '../../locator.dart';
-import '../../services/navigation_service.dart';
-import '../../utils/api_caller.dart';
-
-class LoginContentDesktop extends StatefulWidget {
-  const LoginContentDesktop({Key? key}) : super(key: key);
+class RegisterContentDesktop extends StatefulWidget {
+  const RegisterContentDesktop({Key? key}) : super(key: key);
 
   @override
-  State<LoginContentDesktop> createState() => _LoginContentDesktopState();
+  _RegisterContentDesktopState createState() => _RegisterContentDesktopState();
 }
 
-class _LoginContentDesktopState extends State<LoginContentDesktop> {
-  bool showPassword = true;
-  Color passwordIconColor = Colors.grey;
-
-  final _eController = TextEditingController();
-  final _pController = TextEditingController();
+class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
+  TextEditingController _firstnameController = new TextEditingController();
+  TextEditingController _lastnameController = new TextEditingController();
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
+  TextEditingController _confirmPasswordController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +29,9 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const <Widget>[
                   Text(
-                    'Autentifică-te acum pe \nrevista studențească',
+                    'Înregistrează-te acum pe \nrevista studențească',
                     style: TextStyle(
-                      fontSize: 45,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -47,7 +39,7 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
                     height: 30,
                   ),
                   Text(
-                    'Daca nu ești încă înregistrat',
+                    'Daca ai deja un cont',
                     style: TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,
@@ -58,7 +50,7 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
                     height: 10,
                   ),
                   Text(
-                    'Inregistrează-te aici!',
+                    'Autentifică-te aici!',
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.deepPurple,
@@ -75,8 +67,7 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
               ),
             ),
             Expanded(
-              child: _loginForm(
-                  eController: _eController, pController: _pController),
+              child: _registerForm(),
             )
           ],
         ),
@@ -84,18 +75,14 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
     );
   }
 
-  Widget _loginForm({eController, pController}) {
-    var email = "";
-    var password = "";
-
-    Caller caller = Caller();
+  Widget _registerForm() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextField(
-          controller: eController,
+          controller: _firstnameController,
           decoration: InputDecoration(
-            hintText: 'Email',
+            hintText: 'Prenume',
             fillColor: Colors.blueGrey[50],
             filled: true,
             labelStyle: const TextStyle(fontSize: 12),
@@ -118,31 +105,86 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
           height: 30,
         ),
         TextField(
-          controller: _pController,
-          obscureText: showPassword,
+          controller: _lastnameController,
           decoration: InputDecoration(
-            hintText: 'Parola',
-            counterText: 'Ai uitat parola?',
-            suffixIcon: GestureDetector(
-              onTapDown: (_) {
-                setState(() {
-                  showPassword = false;
-                  passwordIconColor = Colors.deepPurple;
-                });
-              },
-              onTapUp: (_) {
-                setState(() {
-                  showPassword = true;
-                  passwordIconColor = Colors.grey;
-                });
-              },
-              child: Container(
-                child: Icon(
-                  Icons.visibility_off_outlined,
-                  color: passwordIconColor,
-                ),
+            hintText: 'Nume',
+            fillColor: Colors.blueGrey[50],
+            filled: true,
+            labelStyle: const TextStyle(fontSize: 12),
+            contentPadding: const EdgeInsets.only(left: 30),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: (Colors.blueGrey[50])!,
               ),
+              borderRadius: BorderRadius.circular(15),
             ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: (Colors.blueGrey[50])!,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        TextField(
+          controller: _emailController,
+          decoration: InputDecoration(
+            hintText: 'Introduceți email-ul',
+            fillColor: Colors.blueGrey[50],
+            filled: true,
+            labelStyle: const TextStyle(fontSize: 12),
+            contentPadding: const EdgeInsets.only(left: 30),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: (Colors.blueGrey[50])!,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: (Colors.blueGrey[50])!,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        TextField(
+          controller: _passwordController,
+          obscureText: true,
+          decoration: InputDecoration(
+            hintText: 'Introduceți parola',
+            fillColor: Colors.blueGrey[50],
+            filled: true,
+            labelStyle: const TextStyle(fontSize: 12),
+            contentPadding: const EdgeInsets.only(left: 30),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: (Colors.blueGrey[50])!,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: (Colors.blueGrey[50])!,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        TextField(
+          controller: _confirmPasswordController,
+          obscureText: true,
+          decoration: InputDecoration(
+            hintText: 'Reintroduceți parola',
             fillColor: Colors.blueGrey[50],
             filled: true,
             labelStyle: const TextStyle(fontSize: 12),
@@ -182,7 +224,7 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
               height: 50,
               child: const Center(
                 child: Text(
-                  'Autentifică-te',
+                  'Înregistrează-te',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -197,39 +239,7 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            onPressed: () async {
-              email = _eController.text;
-              password = _pController.text;
-              caller.loginRequest(email: email, password: password).then(
-                (value) async {
-                  if (value != 'server error...') {
-                    FlutterSession().set('email', value);
-                    FlutterSession().set('logged', true);
-                    GlobalData.email = value;
-                    GlobalData.logged = true;
-
-                    Fluttertoast.showToast(
-                        msg: "Logged in as $value",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 3,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                    locator<NavigationService>().navigateTo('home');
-                  } else {
-                    Fluttertoast.showToast(
-                        msg: value,
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 3,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  }
-                },
-              );
-            },
+            onPressed: () {},
           ),
         )
       ],

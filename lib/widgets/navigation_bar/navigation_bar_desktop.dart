@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practica_fe/constants/app_colors.dart';
+import 'package:practica_fe/extensions/hover_extensions.dart';
 import 'package:practica_fe/main.dart';
 import 'package:practica_fe/routes/route_names.dart';
 import 'package:practica_fe/views/layout_template/layout_template.dart';
@@ -13,7 +14,6 @@ class NavigationBarDesktop extends StatefulWidget {
 }
 
 class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,27 +62,30 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
           Row(
             children: GlobalData.logged == false
                 ? [
-              const NavBarItem(
-                title: 'Login',
-                navigationPath: LoginRoute,
-              ),
-              const SizedBox(
-                width: 60,
-              )
-            ]
+                    const NavBarItem(
+                      title: 'Login',
+                      navigationPath: LoginRoute,
+                    ),
+                    const SizedBox(
+                      width: 60,
+                    )
+                  ]
                 : [
-              TextButton(
-                child: Text("Log out"),
-                onPressed: () {
-                  GlobalData.logged = false;
-                  GlobalData.email = 'none';
-                  navBar.MyState.refresh();
-                },
-              ),
-              const SizedBox(
-                width: 60,
-              )
-            ],
+                    TextButton(
+                      child: const Text(
+                        "Log out",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ).showCursorOnHover.moveUpOnHover,
+                      onPressed: () {
+                        GlobalData.logged = false;
+                        GlobalData.email = 'none';
+                        navBar.MyState.refresh();
+                      },
+                    ),
+                    const SizedBox(
+                      width: 60,
+                    )
+                  ],
           )
         ],
       ),
