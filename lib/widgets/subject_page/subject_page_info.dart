@@ -122,11 +122,9 @@ class SubjectPageDetails extends StatelessWidget {
                     maxWidth: mediaQuery.size.width * 0.28,
                     maxHeight: mediaQuery.size.width * 0.28,
                   ),
-                  child: Image.network(card.imageUrl != "" ? card.imageUrl : subjectImage,
-                  fit: BoxFit.fill,
-                    width: 200,
-                    height: 200,
-                ),
+                  child: Image.network(
+                      card.imageUrl != "" ? card.imageUrl : subjectImage,
+                      fit: BoxFit.fill),
                 ),
               ),
               Column(

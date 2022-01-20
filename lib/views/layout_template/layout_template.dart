@@ -3,11 +3,14 @@ import 'package:practica_fe/routes/route_names.dart';
 import 'package:practica_fe/routes/router.dart';
 import 'package:practica_fe/services/navigation_service.dart';
 import 'package:practica_fe/widgets/centered_view/centered_view.dart';
-import 'package:practica_fe/widgets/navigation_bar/navigation_bar.dart';
+import 'package:practica_fe/widgets/navigation_bar/navigation_bar.dart'
+    as NavBar;
 import 'package:practica_fe/widgets/navigation_drawer/navigation_drawer.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../locator.dart';
+
+var navBar = NavBar.NavigationBar();
 
 class LayoutTemplate extends StatelessWidget {
   const LayoutTemplate({Key? key}) : super(key: key);
@@ -20,13 +23,13 @@ class LayoutTemplate extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Column(
           children: <Widget>[
-            const NavigationBar(),
+            navBar,
             Expanded(
-                child: Navigator(
-                  key: locator<NavigationService>().navigatorKey,
-                  onGenerateRoute: generateRoute,
-                  initialRoute: HomeRoute,
-                ),
+              child: Navigator(
+                key: locator<NavigationService>().navigatorKey,
+                onGenerateRoute: generateRoute,
+                initialRoute: HomeRoute,
+              ),
             ),
           ],
         ),
