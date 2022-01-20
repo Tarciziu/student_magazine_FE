@@ -4,6 +4,7 @@ import 'package:practica_fe/services/navigation_service.dart';
 import 'package:practica_fe/utils/api_caller.dart';
 
 import '../../locator.dart';
+import '../../routes/route_names.dart';
 
 class RegisterContentDesktop extends StatefulWidget {
   const RegisterContentDesktop({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
+                children: <Widget>[
                   Text(
                     'Înregistrează-te acum pe \nrevista studențească',
                     style: TextStyle(
@@ -56,12 +57,16 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'Autentifică-te aici!',
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.deepPurple,
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () =>
+                        {locator<NavigationService>().navigateTo(LoginRoute)},
+                    child: Text(
+                      'Autentifică-te aici!',
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.deepPurple,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -213,39 +218,57 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
         const SizedBox(
           height: 20,
         ),
-        ElevatedButton(
-          onPressed: () async {
-            var choice = await showDatePicker(
-              helpText: pickedDate,
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.deepPurple,
+                spreadRadius: 2,
+                blurRadius: 5,
+              ),
+            ],
+          ),
+          child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
+            ),
+            onPressed: () async {
+              var choice = await showDatePicker(
+                helpText: pickedDate,
                 context: context,
                 firstDate: DateTime(1900),
                 lastDate: DateTime.now(),
                 initialDate: DateTime.now(),
                 builder: (BuildContext context, Widget? child) {
                   return Center(
-                      child: SizedBox(
-                        width: 400.0,
-                        height: 500.0,
-                        child: child,
-                      ));
-                });
+                    child: SizedBox(
+                      width: 400.0,
+                      height: 500.0,
+                      child: child,
+                    ),
+                  );
+                },
+              );
 
-            setState(() {
-              pickedDate = choice.toString().substring(0,10);
-            });
-          },
-          child: Container(
-            width: 200.0,
-            child: Center(
-              child: Text(
-                pickedDate,
-                style: const TextStyle(color: Colors.white),
+              setState(() {
+                pickedDate = choice.toString().substring(0, 10);
+              });
+            },
+            child: Container(
+              width: 200.0,
+              child: Center(
+                child: Text(
+                  pickedDate,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
         ),
         const SizedBox(
-          height: 20,
+          height: 40,
         ),
         Container(
           decoration: BoxDecoration(
@@ -263,7 +286,7 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
             child: Container(
               width: double.infinity,
               height: 50,
-              child: const Center(
+              child: Center(
                 child: Text(
                   'Înregistrează-te',
                   style: TextStyle(

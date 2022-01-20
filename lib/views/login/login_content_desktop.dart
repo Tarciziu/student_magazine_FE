@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:practica_fe/main.dart';
+import 'package:practica_fe/routes/route_names.dart';
+import 'package:practica_fe/views/register/register_view.dart';
 import 'package:practica_fe/widgets/navigation_bar/navigation_bar_desktop.dart';
 
 import '../../locator.dart';
@@ -35,7 +37,7 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
+                children: <Widget>[
                   Text(
                     'Autentifică-te acum pe \nrevista studențească',
                     style: TextStyle(
@@ -57,12 +59,17 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'Inregistrează-te aici!',
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.deepPurple,
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () => {
+                      locator<NavigationService>().navigateTo(RegisterRoute)
+                    },
+                    child: Text(
+                      'Inregistrează-te aici!',
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.deepPurple,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
