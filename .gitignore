@@ -25,3 +25,7 @@ practica_fe.iml
 analysis_options.yaml
 
 .idea
+lib/generated_plugin_registrant.dart
+
+.flutter-plugins
+.flutter-plugins-dependencies
