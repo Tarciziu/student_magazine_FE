@@ -1,14 +1,9 @@
 import 'dart:convert';
-import 'dart:html';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:practica_fe/views/layout_template/layout_template.dart';
-import 'package:practica_fe/widgets/navigation_bar/navigation_bar.dart';
-import 'package:practica_fe/widgets/navigation_bar/navigation_bar_desktop.dart';
-
-import '../main.dart';
 
 class Caller {
   var dio = Dio();
@@ -20,8 +15,8 @@ class Caller {
 
   Future<String> serverTest() async {
     try {
-      String URL = baseUrl + 'users/welcome';
-      var response = await dio.get(URL);
+      String url = baseUrl + 'users/welcome';
+      var response = await dio.get(url);
       return response.data;
     } catch (ex) {
       return ex.toString();
@@ -31,12 +26,12 @@ class Caller {
   Future<String> loginRequest({email = "", password = ""}) async {
     try {
       var params = {"email": email, "password": password};
-      var URL = baseUrl + 'users/login';
+      var url = baseUrl + 'users/login';
       var data = jsonEncode(params);
       logger.i(
-          'Trying login for EMAIL = { $email }  on URL = { $URL } DATA = $data');
+          'Trying login for EMAIL = { $email }  on URL = { $url } DATA = $data');
       var response = await dio.post(
-        URL,
+        url,
         options: Options(
           headers: {
             HttpHeaders.contentTypeHeader: "application/json",
@@ -44,7 +39,7 @@ class Caller {
         ),
         data: data,
       );
-      navBar.MyState.refresh();
+      navBar.myState.refresh();
       return response.data['email'].toString();
     } catch (ex) {
       print(ex.toString());
@@ -62,12 +57,12 @@ class Caller {
     try {
       var params = {"email": email, "password": password, "firstName": firstname,
       "lastName": lastname, "birthDate": birthday};
-      var URL = baseUrl + 'users/register';
+      var url = baseUrl + 'users/register';
       var data = jsonEncode(params);
       logger.i(
-          'Trying register for EMAIL = { $email }  on URL = { $URL } DATA = $data');
+          'Trying register for EMAIL = { $email }  on URL = { $url } DATA = $data');
       var response = await dio.post(
-        URL,
+        url,
         options: Options(
           headers: {
             HttpHeaders.contentTypeHeader: "application/json",
@@ -83,7 +78,5 @@ class Caller {
       print(ex.toString());
       return 'server error...';
     }
-
-    return email;
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:practica_fe/constants/app_colors.dart';
 import 'package:practica_fe/utils/responsive_helper.dart';
 
 class CreateArticleContentDesktop extends StatefulWidget {

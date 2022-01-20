@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:practica_fe/constants/section_default_images.dart';
 import 'package:practica_fe/views/about/about_view.dart';
+import 'package:practica_fe/views/create_article/create_article_view.dart';
 import 'package:practica_fe/views/home/home_view.dart';
+import 'package:practica_fe/views/login/login_view.dart';
+import 'package:practica_fe/views/register/register_view.dart';
 import 'package:practica_fe/views/subject/subject_view.dart';
 
 import 'route_names.dart';

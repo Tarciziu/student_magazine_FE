@@ -66,7 +66,6 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
           SizedBox(
             width: 60,
           ),
-          ),
           Row(
             children: GlobalData.logged == false
                 ? [
@@ -94,7 +93,7 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
                       onPressed: () {
                         GlobalData.logged = false;
                         GlobalData.email = 'none';
-                        navBar.MyState.refresh();
+                        navBar.myState.refresh();
                       },
                     ),
                     const SizedBox(
