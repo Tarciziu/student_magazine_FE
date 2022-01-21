@@ -1,105 +1,34 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:practica_fe/datamodels/card_article_model.dart';
 import 'package:practica_fe/extensions/hover_extensions.dart';
+import 'package:practica_fe/utils/api_caller.dart';
 import 'package:practica_fe/utils/responsive_helper.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class SubjectPageDetails extends StatelessWidget {
+class SubjectPageDetails extends StatefulWidget {
   final String subject;
   final String subjectImage;
+  SubjectPageDetails({Key? key, required this.subject, required this.subjectImage}) : super(key: key);
 
-  SubjectPageDetails(
-      {Key? key, required this.subject, required this.subjectImage})
-      : super(key: key);
+  @override
+  _SubjectPageDetailsState createState() => _SubjectPageDetailsState();
+}
 
-  List<CardArticleModel> list = [
-    CardArticleModel(
-      title: "Nouă descoperire",
-      author: "Ion Amariei",
-      navigationPath: 'navigationPath',
-      text:
-          "In this code, I am trying to make a list of buttons or tiles as buttons do not work well for me  at the very top of the page. Thus, when one is clicked it returns a value in the rest of the page.The issue is The tile here toke around more than half of the page which makes it looks inconsistent. I want to limit the height of the tile, I have tried putting them in a row and a container and it doesn't work. Any HELP will be appreciated.",
-      imageUrl: "",
-      publishedDate: "10/12/2021",
-    ),
-    CardArticleModel(
-      title: 'Student la UBB, olimpic internațional',
-      author: "George Țirian",
-      navigationPath: 'navigationPath',
-      text: "Aici ceva text scurt, nu tot textul",
-      imageUrl:
-          "https://media.istockphoto.com/photos/heap-of-wooden-numbers-on-blue-background-picture-id1292684021?b=1&k=20&m=1292684021&s=170667a&w=0&h=5-7WcFt5ibtORzehe4YnPSTZIgUiayWQ3ICRrOibazk=",
-      publishedDate: "10/12/2021",
-    ),
-    CardArticleModel(
-      title: "Nouă descoperire",
-      author: "Ion Amariei",
-      navigationPath: 'navigationPath',
-      text: "Aici ceva text scurt, nu tot textul",
-      imageUrl: "",
-      publishedDate: "10/12/2021",
-    ),
-    CardArticleModel(
-      title: 'Student la UBB, olimpic internațional',
-      author: "George Țirian",
-      navigationPath: 'navigationPath',
-      text: "Aici ceva text scurt, nu tot textul",
-      imageUrl:
-          "https://media.istockphoto.com/photos/heap-of-wooden-numbers-on-blue-background-picture-id1292684021?b=1&k=20&m=1292684021&s=170667a&w=0&h=5-7WcFt5ibtORzehe4YnPSTZIgUiayWQ3ICRrOibazk=",
-      publishedDate: "10/12/2021",
-    ),
-    CardArticleModel(
-      title: "Nouă descoperire",
-      author: "Ion Amariei",
-      navigationPath: 'navigationPath',
-      text: "Aici ceva text scurt, nu tot textul",
-      imageUrl: "",
-      publishedDate: "10/12/2021",
-    ),
-    CardArticleModel(
-      title: 'Student la UBB, olimpic internațional',
-      author: "George Țirian",
-      navigationPath: 'navigationPath',
-      text: "Aici ceva text scurt, nu tot textul",
-      imageUrl:
-          "https://media.istockphoto.com/photos/heap-of-wooden-numbers-on-blue-background-picture-id1292684021?b=1&k=20&m=1292684021&s=170667a&w=0&h=5-7WcFt5ibtORzehe4YnPSTZIgUiayWQ3ICRrOibazk=",
-      publishedDate: "10/12/2021",
-    ),
-    CardArticleModel(
-      title: "Nouă descoperire",
-      author: "Ion Amariei",
-      navigationPath: 'navigationPath',
-      text: "Aici ceva text scurt, nu tot textul",
-      imageUrl: "",
-      publishedDate: "10/12/2021",
-    ),
-    CardArticleModel(
-      title: 'Student la UBB, olimpic internațional',
-      author: "George Țirian",
-      navigationPath: 'navigationPath',
-      text: "Aici ceva text scurt, nu tot textul",
-      imageUrl:
-          "https://media.istockphoto.com/photos/heap-of-wooden-numbers-on-blue-background-picture-id1292684021?b=1&k=20&m=1292684021&s=170667a&w=0&h=5-7WcFt5ibtORzehe4YnPSTZIgUiayWQ3ICRrOibazk=",
-      publishedDate: "10/12/2021",
-    ),
-    CardArticleModel(
-      title: "Nouă descoperire",
-      author: "Ion Amariei",
-      navigationPath: 'navigationPath',
-      text: "Aici ceva text scurt, nu tot textul",
-      imageUrl: "",
-      publishedDate: "10/12/2021",
-    ),
-    CardArticleModel(
-      title: 'Student la UBB, olimpic internațional',
-      author: "George Țirian",
-      navigationPath: 'navigationPath',
-      text: "Aici ceva text scurt, nu tot textul",
-      imageUrl:
-          "https://media.istockphoto.com/photos/heap-of-wooden-numbers-on-blue-background-picture-id1292684021?b=1&k=20&m=1292684021&s=170667a&w=0&h=5-7WcFt5ibtORzehe4YnPSTZIgUiayWQ3ICRrOibazk=",
-      publishedDate: "10/12/2021",
-    ),
-  ];
+class _SubjectPageDetailsState extends State<SubjectPageDetails> {
+  List<CardArticleModel> list = List<CardArticleModel>.empty();
+
+  @override
+  void initState(){
+    super.initState();
+    fetchData().then((value) => setState((){list = value;}));
+  }
+
+  Future<List<CardArticleModel>> fetchData() async {
+    var list = await Caller().getArticlesBySectionRequest(widget.subject);
+    return list;
+  }
 
   _buildArticleTile(CardArticleModel card, MediaQueryData mediaQuery) {
     return Padding(
@@ -122,9 +51,11 @@ class SubjectPageDetails extends StatelessWidget {
                     maxWidth: mediaQuery.size.width * 0.28,
                     maxHeight: mediaQuery.size.width * 0.28,
                   ),
-                  child: Image.network(
-                      card.imageUrl != "" ? card.imageUrl : subjectImage,
-                      fit: BoxFit.fill),
+                  child: Image.network(card.imageUrl != "" ? card.imageUrl : widget.subjectImage,
+                    fit: BoxFit.fill,
+                    width: 200,
+                    height: 200,
+                  ),
                 ),
               ),
               Column(
@@ -187,3 +118,4 @@ class SubjectPageDetails extends StatelessWidget {
     );
   }
 }
+

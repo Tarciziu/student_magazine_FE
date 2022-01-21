@@ -14,4 +14,19 @@ class CardArticleModel {
     required this.imageUrl,
     required this.publishedDate,
   });
+
+  @override
+  String toString() {
+    return 'CardArticleModel{title: $title, author: $author, navigationPath: $navigationPath, text: $text, imageUrl: $imageUrl, publishedDate: $publishedDate}';
+  }
+
+  static fromJSON(json) {
+    return CardArticleModel(
+        title: json["title"],
+        author: json["authorName"],
+      publishedDate: json["date"],
+      navigationPath: '',
+      text: json["text"],
+      imageUrl: '',);
+  }
 }

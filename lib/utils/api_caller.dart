@@ -3,7 +3,9 @@ import 'dart:html';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:practica_fe/datamodels/card_article_model.dart';
 import 'package:practica_fe/views/layout_template/layout_template.dart';
 import 'package:practica_fe/widgets/navigation_bar/navigation_bar.dart';
 import 'package:practica_fe/widgets/navigation_bar/navigation_bar_desktop.dart';
@@ -52,16 +54,47 @@ class Caller {
     }
   }
 
+  Future<List<CardArticleModel>> getArticlesBySectionRequest(
+      String section) async {
+    var params = {"section": section};
+    var URL = baseUrl + 'articles/section/';
+    var data = jsonEncode(params);
+    logger.i(
+        'Trying getArticlesBySection for SECTION = { $section }  on URL = { $URL } DATA = $data');
+    try{
+      var response = await dio.get(
+        URL + section,
+        options: Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        List<CardArticleModel> rez = [];
+        Iterable data = json.decode(jsonEncode(response.data));
+        return List.from(data.map((e) => CardArticleModel.fromJSON(e)));
+      }
+
+      return List.empty();
+
+    } catch (ex) {
+      return List.empty();
+    }
+
+  }
+
   Future<String> registerRequest(
       {String email = "",
-      String password = "",
-      String firstname = "",
-      String lastname = "",
-      String birthday = ""}) async {
+        String password = "",
+        String firstname = "",
+        String lastname = "",
+        String birthday = ""}) async {
 
     try {
       var params = {"email": email, "password": password, "firstName": firstname,
-      "lastName": lastname, "birthDate": birthday};
+        "lastName": lastname, "birthDate": birthday};
       var URL = baseUrl + 'users/register';
       var data = jsonEncode(params);
       logger.i(
