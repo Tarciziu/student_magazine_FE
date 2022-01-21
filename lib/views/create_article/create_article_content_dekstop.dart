@@ -1,6 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
+import 'package:practica_fe/locator.dart';
+import 'package:practica_fe/main.dart';
+import 'package:practica_fe/services/navigation_service.dart';
+import 'package:practica_fe/utils/api_caller.dart';
 import 'package:practica_fe/utils/responsive_helper.dart';
 
 class CreateArticleContentDesktop extends StatefulWidget {
@@ -88,9 +93,56 @@ class _CreateArticleContentDesktopState
                       primary: Colors.white,
                       backgroundColor: Colors.green.shade700,
                       onSurface: Colors.grey,
-                      fixedSize: Size(150,40),
+                      fixedSize: Size(150, 40),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (_titleController.text.isEmpty ||
+                          controller.getText().toString().isEmpty ||
+                          selectedOccasion == "Secțiune") {
+                        Fluttertoast.showToast(
+                            msg: "All fields are required",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 3,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      } else {
+                        var content = await controller.getText();
+                        print(content);
+                        var section = selectedOccasion.toString() == "Matematică" ? "Math" :
+                        selectedOccasion.toString() == "Istorie" ? "History" : "computerScience";
+                        Caller()
+                            .createArticleRequest(
+                                title: _titleController.text,
+                                section: section,
+                                content: content,
+                                email: GlobalData.email)
+                            .then((value) async {
+                          if (value != 'server error...') {
+
+                            Fluttertoast.showToast(
+                                msg: "Article created successfully",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                            locator<NavigationService>().navigateTo('home');
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: value,
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 3,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+                        });
+                      }
+                    },
                   ),
                 ],
               ),
@@ -100,9 +152,9 @@ class _CreateArticleContentDesktopState
               HtmlEditor(
                 controller: controller, //required
                 htmlEditorOptions: HtmlEditorOptions(
-                  hint: "Conținutul articolului tău aici...",
+                  hint: "Continutul articolului aici...",
                   shouldEnsureVisible: true,
-                  //initialText: "Your text here...",
+                  initialText: "",
                   characterLimit: 64000,
                 ),
                 otherOptions: OtherOptions(

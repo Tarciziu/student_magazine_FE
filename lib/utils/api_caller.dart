@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -53,10 +54,14 @@ class Caller {
       String firstname = "",
       String lastname = "",
       String birthday = ""}) async {
-
     try {
-      var params = {"email": email, "password": password, "firstName": firstname,
-      "lastName": lastname, "birthDate": birthday};
+      var params = {
+        "email": email,
+        "password": password,
+        "firstName": firstname,
+        "lastName": lastname,
+        "birthDate": birthday
+      };
       var url = baseUrl + 'users/register';
       var data = jsonEncode(params);
       logger.i(
@@ -70,13 +75,58 @@ class Caller {
         ),
         data: data,
       );
-      if (response.statusCode != 200){
+      if (response.statusCode != 200) {
         return response.data["message"];
       }
       return email;
     } catch (ex) {
       print(ex.toString());
       return 'server error...';
+    }
+  }
+
+  Future<String> createArticleRequest(
+      {String title = "",
+      String content = "",
+      String section = "",
+      String email = ""}) async {
+
+    try {
+      var params = {
+        "author": email,
+        "title": title,
+        "text": content,
+        "subject": section
+      };
+
+      var url = baseUrl + 'articles/create';
+      var data = jsonEncode(params);
+
+      logger.i(
+          'Trying create article for TITLE = { $title }, SECTION = { $section }'
+              ' by EMAIL = { $email }  on URL = { $url } DATA = $data');
+
+      var response = await dio.post(
+        url,
+        options: Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json"
+          },
+        ),
+        data: data,
+      ).catchError((error, stackTrace) {
+      throw new Exception(error.toString());
+      }).onError((error, stackTrace) {
+      throw new Exception(error.toString());
+      });
+      if (response.statusCode != 200) {
+        return response.data["message"];
+      }
+      return "Succes";
+
+    } catch (ex) {
+      logger.i(ex.toString());
+      return "server error...";
     }
   }
 }
