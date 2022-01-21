@@ -59,10 +59,6 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
               NavBarItem(title: 'Despre', navigationPath: AboutRoute),
             ],
           ),
-          NavBarItem(
-            title: 'Articol nou',
-            navigationPath: CreateArticleRoute,
-          ),
           SizedBox(
             width: 60,
           ),
@@ -85,6 +81,13 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
                     )
                   ]
                 : [
+                    NavBarItem(
+                      title: 'Articol nou',
+                      navigationPath: CreateArticleRoute,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
                     TextButton(
                       child: const Text(
                         "Log out",

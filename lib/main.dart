@@ -28,4 +28,5 @@ class MyApp extends StatelessWidget {
 class GlobalData {
   static String email = 'none';
   static bool logged = false;
+  static String role = '';
 }
