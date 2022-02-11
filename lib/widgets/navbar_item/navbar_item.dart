@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:practica_fe/datamodels/navbar_item_model.dart';
-import 'package:practica_fe/main.dart';
 import 'package:practica_fe/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';

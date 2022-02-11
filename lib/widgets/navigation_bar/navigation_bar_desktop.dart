@@ -59,6 +59,9 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
               NavBarItem(title: 'Despre', navigationPath: AboutRoute),
             ],
           ),
+          SizedBox(
+            width: 60,
+          ),
           Row(
             children: GlobalData.logged == false
                 ? [
@@ -78,6 +81,13 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
                     )
                   ]
                 : [
+                    NavBarItem(
+                      title: 'Articol nou',
+                      navigationPath: CreateArticleRoute,
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
                     TextButton(
                       child: const Text(
                         "Log out",
@@ -86,7 +96,7 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
                       onPressed: () {
                         GlobalData.logged = false;
                         GlobalData.email = 'none';
-                        navBar.MyState.refresh();
+                        navBar.myState.refresh();
                       },
                     ),
                     const SizedBox(

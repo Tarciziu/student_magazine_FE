@@ -5,3 +5,4 @@ const String ComputerScienceRoute = 'computerScience';
 const String HistoryRoute = 'history';
 const String LoginRoute = 'login';
 const String RegisterRoute = 'register';
+const String CreateArticleRoute = 'createArticle';

@@ -6,10 +6,10 @@ import 'package:responsive_builder/responsive_builder.dart';
 class NavigationBar extends StatefulWidget {
   NavigationBar({Key? key}) : super(key: key);
 
-  _NavigationBarState MyState = _NavigationBarState();
+  final _NavigationBarState myState = _NavigationBarState();
 
   @override
-  _NavigationBarState createState() => MyState;
+  _NavigationBarState createState() => myState;
 }
 
 class _NavigationBarState extends State<NavigationBar> {

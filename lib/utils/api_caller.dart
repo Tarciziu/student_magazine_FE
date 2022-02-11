@@ -1,5 +1,5 @@
+import 'dart:async';
 import 'dart:convert';
-import 'dart:html';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -7,10 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:practica_fe/datamodels/card_article_model.dart';
 import 'package:practica_fe/views/layout_template/layout_template.dart';
-import 'package:practica_fe/widgets/navigation_bar/navigation_bar.dart';
-import 'package:practica_fe/widgets/navigation_bar/navigation_bar_desktop.dart';
-
-import '../main.dart';
 
 class Caller {
   var dio = Dio();
@@ -22,8 +18,8 @@ class Caller {
 
   Future<String> serverTest() async {
     try {
-      String URL = baseUrl + 'users/welcome';
-      var response = await dio.get(URL);
+      String url = baseUrl + 'users/welcome';
+      var response = await dio.get(url);
       return response.data;
     } catch (ex) {
       return ex.toString();
@@ -33,12 +29,12 @@ class Caller {
   Future<String> loginRequest({email = "", password = ""}) async {
     try {
       var params = {"email": email, "password": password};
-      var URL = baseUrl + 'users/login';
+      var url = baseUrl + 'users/login';
       var data = jsonEncode(params);
       logger.i(
-          'Trying login for EMAIL = { $email }  on URL = { $URL } DATA = $data');
+          'Trying login for EMAIL = { $email }  on URL = { $url } DATA = $data');
       var response = await dio.post(
-        URL,
+        url,
         options: Options(
           headers: {
             HttpHeaders.contentTypeHeader: "application/json",
@@ -46,7 +42,7 @@ class Caller {
         ),
         data: data,
       );
-      navBar.MyState.refresh();
+      navBar.myState.refresh();
       return response.data['email'].toString();
     } catch (ex) {
       print(ex.toString());
@@ -87,20 +83,24 @@ class Caller {
 
   Future<String> registerRequest(
       {String email = "",
-        String password = "",
-        String firstname = "",
-        String lastname = "",
-        String birthday = ""}) async {
-
+      String password = "",
+      String firstname = "",
+      String lastname = "",
+      String birthday = ""}) async {
     try {
-      var params = {"email": email, "password": password, "firstName": firstname,
-        "lastName": lastname, "birthDate": birthday};
-      var URL = baseUrl + 'users/register';
+      var params = {
+        "email": email,
+        "password": password,
+        "firstName": firstname,
+        "lastName": lastname,
+        "birthDate": birthday
+      };
+      var url = baseUrl + 'users/register';
       var data = jsonEncode(params);
       logger.i(
-          'Trying register for EMAIL = { $email }  on URL = { $URL } DATA = $data');
+          'Trying register for EMAIL = { $email }  on URL = { $url } DATA = $data');
       var response = await dio.post(
-        URL,
+        url,
         options: Options(
           headers: {
             HttpHeaders.contentTypeHeader: "application/json",
@@ -108,7 +108,7 @@ class Caller {
         ),
         data: data,
       );
-      if (response.statusCode != 200){
+      if (response.statusCode != 200) {
         return response.data["message"];
       }
       return email;
@@ -116,7 +116,50 @@ class Caller {
       print(ex.toString());
       return 'server error...';
     }
+  }
 
-    return email;
+  Future<String> createArticleRequest(
+      {String title = "",
+      String content = "",
+      String section = "",
+      String email = ""}) async {
+
+    try {
+      var params = {
+        "author": email,
+        "title": title,
+        "text": content,
+        "subject": section
+      };
+
+      var url = baseUrl + 'articles/create';
+      var data = jsonEncode(params);
+
+      logger.i(
+          'Trying create article for TITLE = { $title }, SECTION = { $section }'
+              ' by EMAIL = { $email }  on URL = { $url } DATA = $data');
+
+      var response = await dio.post(
+        url,
+        options: Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json"
+          },
+        ),
+        data: data,
+      ).catchError((error, stackTrace) {
+      throw new Exception(error.toString());
+      }).onError((error, stackTrace) {
+      throw new Exception(error.toString());
+      });
+      if (response.statusCode != 200) {
+        return response.data["message"];
+      }
+      return "Succes";
+
+    } catch (ex) {
+      logger.i(ex.toString());
+      return "server error...";
+    }
   }
 }

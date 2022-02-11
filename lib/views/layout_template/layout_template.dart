@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:practica_fe/routes/route_names.dart';
 import 'package:practica_fe/routes/router.dart';
 import 'package:practica_fe/services/navigation_service.dart';
-import 'package:practica_fe/widgets/centered_view/centered_view.dart';
 import 'package:practica_fe/widgets/navigation_bar/navigation_bar.dart'
     as NavBar;
 import 'package:practica_fe/widgets/navigation_drawer/navigation_drawer.dart';
@@ -19,7 +18,7 @@ class LayoutTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
-        drawer: const NavigationDrawer(),
+        drawer: MediaQuery.of(context).size.width <1100 ? const NavigationDrawer():null,
         backgroundColor: Colors.white,
         body: Column(
           children: <Widget>[
