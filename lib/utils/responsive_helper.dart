@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart';
 
 EdgeInsetsGeometry responsivePadding(MediaQueryData mediaQuery) {
   double deviceWidth = mediaQuery.size.width;
@@ -60,13 +61,22 @@ double responsiveWordsNum(MediaQueryData mediaQuery) {
   return 300;
 }
 
-String firstFewWords(MediaQueryData mediaQuery, String bigSentence){
+String _parseHtmlString(String htmlString) {
+  final document = parse(htmlString);
+  final String parsedString = parse(document.body!.text).documentElement!.text;
 
+  return parsedString;
+}
+
+String firstFewWords(MediaQueryData mediaQuery, String bigSentence) {
   int startIndex = 0, indexOfSpace = 0;
 
-  for(int i = 0; i < responsiveWordsNum(mediaQuery); i++){
+  bigSentence = _parseHtmlString(bigSentence);
+
+  for (int i = 0; i < responsiveWordsNum(mediaQuery); i++) {
     indexOfSpace = bigSentence.indexOf(' ', startIndex);
-    if(indexOfSpace == -1){     //-1 is when character is not found
+    if (indexOfSpace == -1) {
+      //-1 is when character is not found
       return bigSentence;
     }
     startIndex = indexOfSpace + 1;
