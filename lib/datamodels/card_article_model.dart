@@ -1,4 +1,5 @@
 class CardArticleModel {
+  final int id;
   final String title;
   final String author;
   final String navigationPath;
@@ -7,6 +8,7 @@ class CardArticleModel {
   final String publishedDate;
 
   CardArticleModel({
+    required this.id,
     required this.title,
     required this.author,
     required this.navigationPath,
@@ -17,16 +19,18 @@ class CardArticleModel {
 
   @override
   String toString() {
-    return 'CardArticleModel{title: $title, author: $author, navigationPath: $navigationPath, text: $text, imageUrl: $imageUrl, publishedDate: $publishedDate}';
+    return 'CardArticleModel{id: $id, title: $title, author: $author, navigationPath: $navigationPath, text: $text, imageUrl: $imageUrl, publishedDate: $publishedDate}';
   }
 
   static fromJSON(json) {
     return CardArticleModel(
-        title: json["title"],
-        author: json["authorName"],
+      id: json["id"],
+      title: json["title"],
+      author: json["authorName"],
       publishedDate: json["date"],
       navigationPath: '',
       text: json["text"],
-      imageUrl: '',);
+      imageUrl: '',
+    );
   }
 }

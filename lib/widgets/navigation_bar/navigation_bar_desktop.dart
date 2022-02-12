@@ -82,12 +82,29 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
                   ]
                 : [
                     NavBarItem(
-                      title: 'Articol nou',
-                      navigationPath: CreateArticleRoute,
+                      title: "Vizualizare profil",
+                      navigationPath: ViewProfileRoute,
                     ),
                     const SizedBox(
                       width: 20,
                     ),
+                    GlobalData.role == "Student" ||
+                            GlobalData.role == "Administrator"
+                        ? NavBarItem(
+                            title: 'Articol nou',
+                            navigationPath: CreateArticleRoute,
+                          )
+                        : SizedBox(
+                            width: 20,
+                          ),
+                    GlobalData.role == "Student" ||
+                            GlobalData.role == "Administrator"
+                        ? SizedBox(
+                            width: 20,
+                          )
+                        : SizedBox(
+                            width: 0,
+                          ),
                     TextButton(
                       child: const Text(
                         "Log out",

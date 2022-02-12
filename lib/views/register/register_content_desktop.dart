@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:practica_fe/routes/route_names.dart';
 import 'package:practica_fe/services/navigation_service.dart';
 import 'package:practica_fe/utils/api_caller.dart';
 
@@ -34,7 +36,7 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
+                children: <Widget>[
                   Text(
                     'Înregistrează-te acum pe \nrevista studențească',
                     style: TextStyle(
@@ -56,12 +58,17 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'Autentifică-te aici!',
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.deepPurple,
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () => {
+                      locator<NavigationService>().navigateTo(LoginRoute),
+                    },
+                    child: Text(
+                      'Autentifică-te aici!',
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.deepPurple,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -214,6 +221,9 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
           height: 20,
         ),
         ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
+          ),
           onPressed: () async {
             var choice = await showDatePicker(
               helpText: pickedDate,
@@ -245,7 +255,7 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
           ),
         ),
         const SizedBox(
-          height: 20,
+          height: 30,
         ),
         Container(
           decoration: BoxDecoration(
@@ -254,8 +264,8 @@ class _RegisterContentDesktopState extends State<RegisterContentDesktop> {
             boxShadow: const [
               BoxShadow(
                 color: Colors.deepPurple,
-                spreadRadius: 10,
-                blurRadius: 20,
+                spreadRadius: 1,
+                blurRadius: 30,
               ),
             ],
           ),
