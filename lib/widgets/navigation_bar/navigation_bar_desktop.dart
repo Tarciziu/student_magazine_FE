@@ -3,8 +3,11 @@ import 'package:practica_fe/constants/app_colors.dart';
 import 'package:practica_fe/extensions/hover_extensions.dart';
 import 'package:practica_fe/main.dart';
 import 'package:practica_fe/routes/route_names.dart';
+import 'package:practica_fe/services/navigation_service.dart';
 import 'package:practica_fe/views/layout_template/layout_template.dart';
 import 'package:practica_fe/widgets/navbar_item/navbar_item.dart';
+
+import '../../locator.dart';
 
 class NavigationBarDesktop extends StatefulWidget {
   NavigationBarDesktop({Key? key}) : super(key: key);
@@ -114,6 +117,7 @@ class _NavigationBarDesktopState extends State<NavigationBarDesktop> {
                         GlobalData.logged = false;
                         GlobalData.email = 'none';
                         navBar.myState.refresh();
+                        locator<NavigationService>().navigateTo(LoginRoute);
                       },
                     ),
                     const SizedBox(

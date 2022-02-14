@@ -34,6 +34,7 @@ class _SubjectPageDetailsState extends State<SubjectPageDetails> {
 
   Future<List<CardArticleModel>> fetchData() async {
     var list = await Caller().getArticlesBySectionRequest(widget.subject);
+    print(list);
     return list;
   }
 
