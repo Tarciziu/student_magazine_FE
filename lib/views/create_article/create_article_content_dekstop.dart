@@ -110,8 +110,8 @@ class _CreateArticleContentDesktopState
                       } else {
                         var content = await controller.getText();
                         print(content);
-                        var section = selectedOccasion.toString() == "Matematică" ? "Math" :
-                        selectedOccasion.toString() == "Istorie" ? "History" : "computerScience";
+                        var section = selectedOccasion.toString() == "Matematică" ? "math" :
+                        selectedOccasion.toString() == "Istorie" ? "history" : "computerScience";
                         Caller()
                             .createArticleRequest(
                                 title: _titleController.text,
