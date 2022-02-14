@@ -4,9 +4,11 @@ import 'package:practica_fe/views/about/about_view.dart';
 import 'package:practica_fe/views/create_article/create_article_view.dart';
 import 'package:practica_fe/views/home/home_view.dart';
 import 'package:practica_fe/views/login/login_view.dart';
+import 'package:practica_fe/views/profile/profile_view.dart';
 import 'package:practica_fe/views/register/register_view.dart';
 import 'package:practica_fe/views/subject/subject_view.dart';
 
+import '../views/article_page/article_view.dart';
 import 'route_names.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -20,13 +22,32 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AboutRoute:
       return _getPageRoute(const AboutView(), settings);
     case MathRoute:
-      return _getPageRoute(const SubjectView(subject: "math", subjectImage: mathUrl,), settings);
-     case ComputerScienceRoute:
-      return _getPageRoute(const SubjectView(subject: "computerScience", subjectImage: computerScienceUrl,), settings);
-     case HistoryRoute:
-      return _getPageRoute(const SubjectView(subject: "history", subjectImage: mathUrl,), settings);
+      return _getPageRoute(
+          const SubjectView(
+            subject: "math",
+            subjectImage: mathUrl,
+          ),
+          settings);
+    case ComputerScienceRoute:
+      return _getPageRoute(
+          const SubjectView(
+            subject: "computerScience",
+            subjectImage: computerScienceUrl,
+          ),
+          settings);
+    case HistoryRoute:
+      return _getPageRoute(
+          const SubjectView(
+            subject: "history",
+            subjectImage: mathUrl,
+          ),
+          settings);
     case CreateArticleRoute:
       return _getPageRoute(const CreateArticleView(), settings);
+    case ViewProfileRoute:
+      return _getPageRoute(const ProfileView(), settings);
+    case ViewArticle:
+      return _getPageRoute(const ArticleView(), settings);
     default:
       return _getPageRoute(const HomeView(), settings);
   }
@@ -41,22 +62,22 @@ class _FadeRoute extends PageRouteBuilder {
   final String? routeName;
   _FadeRoute({required this.child, this.routeName})
       : super(
-    settings: RouteSettings(name: routeName),
-    pageBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-        ) =>
-    child,
-    transitionsBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-        Widget child,
-        ) =>
-        FadeTransition(
-          opacity: animation,
-          child: child,
-        ),
-  );
+          settings: RouteSettings(name: routeName),
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              child,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+        );
 }

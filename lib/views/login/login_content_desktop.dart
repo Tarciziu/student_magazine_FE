@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:practica_fe/main.dart';
+import 'package:practica_fe/routes/route_names.dart';
 
 import '../../locator.dart';
 import '../../services/navigation_service.dart';
@@ -33,7 +34,7 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
+                children: <Widget>[
                   Text(
                     'Autentifică-te acum pe \nrevista studențească',
                     style: TextStyle(
@@ -55,12 +56,17 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'Inregistrează-te aici!',
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.deepPurple,
-                      fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () => {
+                      locator<NavigationService>().navigateTo(RegisterRoute)
+                    },
+                    child: Text(
+                      'Inregistrează-te aici!',
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.deepPurple,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -201,7 +207,8 @@ class _LoginContentDesktopState extends State<LoginContentDesktop> {
               caller.loginRequest(email: email, password: password).then(
                 (value) async {
                   if (value != 'server error...') {
-                    GlobalData.email = value;
+                    GlobalData.email = value.split(' ')[0];
+                    GlobalData.role = value.split(' ')[1];
                     GlobalData.logged = true;
 
                     Fluttertoast.showToast(

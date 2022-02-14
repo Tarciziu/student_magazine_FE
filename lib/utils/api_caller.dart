@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:practica_fe/datamodels/card_article_model.dart';
 import 'package:practica_fe/views/layout_template/layout_template.dart';
@@ -26,6 +25,44 @@ class Caller {
     }
   }
 
+  Future<CardArticleModel?> getArticleById({id}) async {
+    try {
+      var url = baseUrl + "articles/$id";
+      logger.i('Trying getArticleById for ID = { $id }  on URL = { $url }');
+      var response = await dio.get(
+        url,
+        options: Options(headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+        }),
+      );
+      return CardArticleModel.fromJSON(response.data);
+    } catch (ex) {
+      return null;
+    }
+  }
+
+  Future<String> getUser({email = ""}) async {
+    try {
+      var url = baseUrl + 'users/getByEmail';
+      logger.i('Getting data of user with EMAIL = {$email} on URL = { $url }');
+      var response = await dio.post(
+        url,
+        options: Options(headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+        }),
+        data: email,
+      );
+      return response.data["firstName"].toString() +
+          " " +
+          response.data["lastName"].toString() +
+          " " +
+          response.data["birthDate"].toString().split('T')[0];
+    } catch (ex) {
+      print(ex.toString());
+      return 'server error...';
+    }
+  }
+
   Future<String> loginRequest({email = "", password = ""}) async {
     try {
       var params = {"email": email, "password": password};
@@ -43,7 +80,9 @@ class Caller {
         data: data,
       );
       navBar.myState.refresh();
-      return response.data['email'].toString();
+      return response.data['email'].toString() +
+          " " +
+          response.data["role"].toString();
     } catch (ex) {
       print(ex.toString());
       return 'server error...';
@@ -57,7 +96,7 @@ class Caller {
     var data = jsonEncode(params);
     logger.i(
         'Trying getArticlesBySection for SECTION = { $section }  on URL = { $URL } DATA = $data');
-    try{
+    try {
       var response = await dio.get(
         URL + section,
         options: Options(
@@ -74,11 +113,9 @@ class Caller {
       }
 
       return List.empty();
-
     } catch (ex) {
       return List.empty();
     }
-
   }
 
   Future<String> registerRequest(
@@ -123,7 +160,6 @@ class Caller {
       String content = "",
       String section = "",
       String email = ""}) async {
-
     try {
       var params = {
         "author": email,
@@ -137,26 +173,25 @@ class Caller {
 
       logger.i(
           'Trying create article for TITLE = { $title }, SECTION = { $section }'
-              ' by EMAIL = { $email }  on URL = { $url } DATA = $data');
+          ' by EMAIL = { $email }  on URL = { $url } DATA = $data');
 
-      var response = await dio.post(
+      var response = await dio
+          .post(
         url,
         options: Options(
-          headers: {
-            HttpHeaders.contentTypeHeader: "application/json"
-          },
+          headers: {HttpHeaders.contentTypeHeader: "application/json"},
         ),
         data: data,
-      ).catchError((error, stackTrace) {
-      throw new Exception(error.toString());
+      )
+          .catchError((error, stackTrace) {
+        throw new Exception(error.toString());
       }).onError((error, stackTrace) {
-      throw new Exception(error.toString());
+        throw new Exception(error.toString());
       });
       if (response.statusCode != 200) {
         return response.data["message"];
       }
       return "Succes";
-
     } catch (ex) {
       logger.i(ex.toString());
       return "server error...";

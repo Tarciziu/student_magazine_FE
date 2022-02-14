@@ -6,3 +6,5 @@ const String HistoryRoute = 'history';
 const String LoginRoute = 'login';
 const String RegisterRoute = 'register';
 const String CreateArticleRoute = 'createArticle';
+const String ViewProfileRoute = 'profile';
+const String ViewArticle = 'article';
